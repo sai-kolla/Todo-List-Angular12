@@ -1,0 +1,25 @@
+<ul class="todo-list">
+  <li
+    *ngFor="let todo of todos"
+    [class.completed]="todo.completed"
+    [class.editing]="todo.editing"
+  >
+    <input
+      class="edit"
+      *ngIf="todo.editing"
+      [value]="todo.text"
+      #editedtodo
+      (keyup.enter)="updateEditingTodo(todo, editedtodo.value)"
+    />
+    <div class="view">
+      <input
+        class="toggle"
+        type="checkbox"
+        (click)="toggleTodo(todo)"
+        [checked]="todo.completed"
+      />
+      <label (dblclick)="editTodo(todo)" donothing>{{ todo.text }}</label>
+      <button class="destroy" (click)="deleteTodo(todo)"></button>
+    </div>
+  </li>
+</ul>
